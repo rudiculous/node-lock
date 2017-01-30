@@ -1,6 +1,6 @@
 {
   "name": "@rdcl/lock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library to manage locks.",
   "main": "index.js",
   "scripts": {

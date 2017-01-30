@@ -4,7 +4,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 
-Generate a random alphanumerical string with a specified length.
+A library to manage locks.
 
 ##  Installation
 `npm install @rdcl/lock`
