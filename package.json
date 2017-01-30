@@ -1,0 +1,19 @@
+{
+  "name": "@rdcl/lock",
+  "version": "1.0.0",
+  "description": "A library to manage locks.",
+  "main": "index.js",
+  "scripts": {
+    "cover": "istanbul cover _mocha -- -R spec test/*",
+    "test": "mocha --reporter spec"
+  },
+  "repository": "https://github.com/rudiculous/node-lock",
+  "author": "Ruud van der Weide <rj@rdcl.nl>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.15",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
+  }
+}
