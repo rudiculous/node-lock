@@ -13,11 +13,13 @@ A library to manage locks.
 ```javascript
 import { requestLock } from '@rdcl/lock'
 
-const lock = await requestLock('myLockName')
+const lock1 = await requestLock('myLockName') // no timeout
+const lock2 = await requestLock('myLockName', 1000) // timeout after 1 second
 
 // ...
 
-lock.release()
+lock1.release()
+lock2.release()
 ```
 
 ## Tests

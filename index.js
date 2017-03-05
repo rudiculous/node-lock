@@ -39,14 +39,28 @@ class Lock {
  * Requests a lock.
  *
  * @param {string} name
+ * @param {number} [timeout]
  * @return {Promise.<Lock>}
  */
-function requestLock(name) {
+function requestLock(name, timeout = null) {
   if (locks[name] == null) {
     return Promise.resolve(locks[name] = new Lock(name))
   }
 
-  return locks[name].promise.then(() => requestLock(name))
+  return new Promise((resolve, reject) => {
+    let timeoutRef = null
+    if (timeout != null) {
+      timeoutRef = setTimeout(() => {
+        reject(new Error('A timeout occurred.'))
+      }, timeout)
+    }
+
+    locks[name].promise
+      .then(() => {
+        resolve(requestLock(name))
+        clearTimeout(timeoutRef)
+      })
+  })
 }
 
 exports.requestLock = requestLock

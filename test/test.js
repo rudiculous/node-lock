@@ -17,11 +17,11 @@ describe('#lock.requestLock', () => {
       }
     }
 
-    lock.requestLock('test2')
+    lock.requestLock('test1')
       .then(lock1 => {
         activeLocks.lock1 = true
 
-        lock.requestLock('test2')
+        lock.requestLock('test1')
           .then(lock2 => {
             activeLocks.lock2 = true
 
@@ -37,7 +37,7 @@ describe('#lock.requestLock', () => {
           })
           .catch(done)
 
-        lock.requestLock('test2')
+        lock.requestLock('test1')
           .then(lock3 => {
             activeLocks.lock3 = true
 
@@ -57,6 +57,20 @@ describe('#lock.requestLock', () => {
           activeLocks.lock1 = false
           lock1.release()
         }, 5)
+      })
+      .catch(done)
+  })
+
+  it('should return a promise which rejects only when a timeout occurs', done => {
+    lock.requestLock('test2')
+      .then(lock1 => {
+        lock.requestLock('test2', 10)
+          .then(lock2 => {
+            done(new Error('No timeout occurred.'))
+          })
+          .catch(err => {
+            done()
+          })
       })
       .catch(done)
   })
